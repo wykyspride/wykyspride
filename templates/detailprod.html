@@ -1,0 +1,81 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+
+<form method="post">
+  {%csrf_token%}
+
+               <!--ICONE AJOUT DANS PANIER-->
+  <table class="table">
+
+      <tr>
+
+          <!--<th>N°</th>-->
+          <th ></th>
+          <th name="name">Nom du produit</th>
+          <th name="description">Description</th>
+          <th name="prixu">Prix Unitaire</th>
+      </tr>
+  
+  
+       <tr>
+              <!--<th scope="row">{{leproduit.idpro}}</th>-->
+              <td name="Image" width=400 ><img src="{{leproduit.imageprod.url}}", width=250 height=250, style="border-radius: 20px;"></img><br><br>
+              
+              <!--Champ quantite-->
+              <label >Prix Unitaire &nbsp &nbsp </label>
+                <input type="number" id="prixunitaire" value="{{leproduit.prixu}}" style=" width: 140px; text-align: center ; border-radius: 10px; border: 1px; background-color:rgb(215, 214, 218);color:rgb(202, 13, 13)"  disabled><br><br>
+
+              <!--Champ quantite-->
+                <label >Quantité &nbsp &nbsp &nbsp &nbsp &nbsp</label>
+                <input oninput="Calcultotal();" style=" width: 140px; text-align: center; border-radius: 10px; border: 1px; background-color:rgb(215, 214, 218);color:rgb(202, 13, 13)" name="qte" type="number" id="quantite"><br><br>
+                <!--Champ total-->
+                <label >Total &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</label>
+                <input    style=" width: 140px; text-align: center ; border-radius: 10px; border: 1px; background-color:rgb(215, 214, 218);color:rgb(202, 13, 13)" name="prixtotal" type="number" id="prixtotal" ><br><br>
+
+<!--Bouton panier-->
+<div align="left">
+<button  class="btn btn-floating" title="Ajouter dans mon panier" type="submit" >
+  <svg id="i-cart"  style="color: red;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="25" height="25" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" >
+    <path d="M6 6 L30 6 27 19 9 19 M27 23 L10 23 5 2 2 2" />
+   <circle cx="25" cy="27" r="2" />
+    <circle cx="12" cy="27" r="2" />
+  </svg>
+</button>  
+<!--Le champs qui recupere le stock dispoible pour verification--> 
+  <input value={{leproduit.qte}}  id="stoc" type="number" style="visibility:hidden;">
+
+</div>      
+              
+              
+              </td>
+              <td name="name">{{leproduit.nom}}</td>
+              <td name="description">{{leproduit.description}}</td>
+              <td name="prixu" id="prixun">{{leproduit.prixu}}</td>
+              
+       </tr>
+    </table>
+  
+
+    <!--Calcul du total et verification du stock-->
+<script type="text/javascript">
+  function Calcultotal(){
+          var prixu = document.getElementById('prixunitaire').value;
+          var qte = document.getElementById('quantite').value ;
+          var stock=document.getElementById('stoc').value;
+            if (qte > stock)
+              alert("Stock insufisant", 
+                document.getElementById('quantite').value = 1, 
+                document.getElementById('prixtotal').value = prixu
+              )
+            else
+                document.getElementById('prixtotal').value = prixu*qte
+            endif
+  };
+</script>
+  </form>
+
+
+
+
+  {% endblock %}

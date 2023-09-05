@@ -1,0 +1,44 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--AFFICHER LES PRODUITS DANS UN TABLEAU-->
+ 
+  <!--Bouton creer nouveau-->
+  <div align="right"><a href="{% url 'ajoutprod'%}"  class="btn btn-success" >Nouveau</a>
+    <a href="#" class="btn btn-primary" >Imprimer</a><br><br></div>
+  
+  <table class="table">
+    
+      <tr>
+          <th>N°</th>
+          <th>Statut</th>
+          <th>Date</th>
+          <th >Client</th>
+          <th>Total HT</th>
+          <th>Total TTC</th>
+          <th>Remise</th>
+          <th >Total Paye</th>
+          <th >Commentaire</th>
+      </tr>
+  
+  
+      {% for com in listecom %}
+       <tr >
+              <th scope="row">{{com.idcom}}</th>
+              <td>{{com.idstatut}}</td>
+              <td>{{com.datecom}}</td>
+              <td>{{com.client}}</td>
+              <td>{{com.totalht}}</td>
+              <td>{{com.totalttc}}</td>
+              <td>{{com.remise}}</td>
+              <td>{{com.totalpaye}}</td>
+              <td>{{com.commentaire}}</td>
+              <td>
+                <a href="detailprod/{{product.idpro}}" class="btn btn-primary">Valider</a>
+                <td><a href="modifprod/{{product.idpro}}"  class="btn btn-warning">Annuler</a></td>  
+              </td>
+       </tr>
+          {% endfor %}
+    </table>
+  
+  {% endblock %}

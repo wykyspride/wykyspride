@@ -1,0 +1,43 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--AFFICHER LES PRODUITS DANS UN TABLEAU-->
+ 
+<!--MENU DE L'UTISATEUR CONNECTE-->
+
+    <!--CONTENU DES ONGLETS-->
+        <form method="post">
+            {%csrf_token%}
+
+         <div style="background-color: rgb(200, 222, 230) ; font-style: italic;">
+         <h7><b>Commande N° {{lacommande.idcom}}</b></h7> <br>
+         <h7>Client: {{lacommande.client_id.nom}}</h7><br> 
+         <h7>Date: {{lacommande.datecom}}</h7><br>
+         <h7>Montant: {{lacommande.totalpaye}}</h7><br>
+        </div><br>
+        <!--Bouton creer nouveau-->
+        <div align="right"><button href="#"  class="btn btn-success" type="submit" >Valider l'achat</button></div>
+        </form >
+          <table class="table">
+              <tr>
+                  <th>N° Ligne</th>
+                  <th>Produit</th>
+                  <th>Prix U</th>
+                  <th>Qte</th>
+                  <th>Prix Total</th>
+        
+              </tr>
+              {% for detailcom in detailcomande %}
+               <tr >
+                      <th scope="row">{{detailcom.idlcom}}</th>
+                      <td>{{detailcom.idprod.nom}}</td>
+                      <td>{{detailcom.prixu}}</td>
+                      <td>{{detailcom.qte}}</td>
+                      <td>{{detailcom.prixtotal}}</td>
+               </tr>
+                  {% endfor %}
+            </table>
+    </div>
+  
+  
+      {% endblock %}

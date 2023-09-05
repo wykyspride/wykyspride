@@ -1,0 +1,16 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--AFFICHER LES PRODUITS DANS UN TABLEAU-->
+ <form align="center" method="post">
+    {%csrf_token%}
+<div>
+    <P1 style="color: red;">Voulez-vous supprimer ce produit:  <b>{{nom}}&nbsp?</b></P1><br><br>
+    <div align="center">
+        <button type="submit"  class="btn btn-danger" >Oui</button>
+        <a href="{% url 'espacegestion'%}" class="btn btn-primary" >Non</a><br><br>
+    </div>
+</div>
+</form>
+
+{% endblock %}

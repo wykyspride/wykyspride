@@ -1,0 +1,68 @@
+<!--ON RECUPERE LE FORMULAIRE DANS BASE.HTML-->
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--CREATION DES PRODUITS-->
+
+<center>
+<form class="row g-3" action="" method="POST">
+
+    {% csrf_token %}
+    <!--Choix du fournisseur-->
+    <div class="col-md-4">
+    <label for="validationDefault01" class="form-label" style="color: brown;">Fournisseur</label>
+        <select class="form-select" aria-label="Default select example" name="fournisseur_id" id="Fournisseur">
+            {% for four in lesfournisseur %}
+             <option value="{{four.idfour}}" id="idfour">{{four.nomfour}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!--Choix du type de produit-->
+    <div class="col-md-4">
+        <label for="validationDefault01" class="form-label" style="color: brown;">Catégorie</label>
+            <select class="form-select" name="categorie_id" aria-label="Default select example" id="categorie">
+                {% for cp in lescatproduit %}
+                 <option value="{{leproduit.idcat}}" >{{cp.libelle}}</option>
+                 {% endfor %}
+            </select>
+     </div>
+
+    <div class="col-md-4">
+      <label for="validationDefault01" class="form-label" style="color: brown;">Nom du produit</label>
+      <input name="nom" type="text" class="form-control" id="validationDefault01" required value="{{leproduit.nom}}">
+    </div>
+    <div class="col-md-4">
+      <label for="validationDefault02" class="form-label" style="color: brown;">Description du produit</label>
+      <input name="description" type="text" class="form-control" id="validationDefault02" required value="{{leproduit.description}}">
+    </div>
+    <div class="col-md-4">
+      <label for="validationDefaultUsername" class="form-label" style="color: brown;">Le prix du produit</label>
+      <div class="input-group">
+        <input name="prixu" type="number" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required value="{{leproduit.prixu}}">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+        <label for="validationDefaultUsername" class="form-label" style="color: brown;">Quantité</label>
+        <div class="input-group">
+          <input name="qte" type="number" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required value="{{leproduit.qte}}">
+        </div>
+      </div>
+
+    <div class="col-md-3">
+      <img name="imageprod" type="file"  width=40 height=40  src="{{leproduit.imageprod.url}}" ></img>
+      <input name="imageprod" type="file" class="form-control" id="validationDefault03" required  value="{{leproduit.imageprod.url}}" ></input>
+
+    </div>
+  
+    <div class="col-12">
+      <button class="btn btn-success" type="submit">Valider</button>
+    </div>
+  </form>
+
+  <form>
+    
+  </form>
+{% endblock %}
+</center>

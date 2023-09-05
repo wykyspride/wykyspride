@@ -1,0 +1,186 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--AFFICHER LES PRODUITS DANS UN TABLEAU-->
+ 
+<!--MENU DE L'UTISATEUR CONNECTE-->
+
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">MON PANIER</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">MES COMMANDES</button>
+        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">MES ACHATS</button>
+        <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" >AUTRES</button>
+      </div>
+    </nav>
+
+    <!--CONTENU DES ONGLETS-->
+    <div class="tab-content" id="nav-tabContent">
+
+      <!--ONGLET PANIER-->
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+
+        <form method="post">
+          {%csrf_token%}
+        <!--Bouton creer nouveau-->
+        <div align="right"><button href="#"  class="btn btn-success" type="submit">Valider ma commande</button></div>
+        </form>
+
+        <label for="validationDefault01" class="form-label" style="color: brown;">Total</label>
+        <input type="text" value={{leprixtotal}}FCFA disabled>
+        <table class="table">
+              <tr>
+                  <th>N°</th>
+                  <th >Produit</th>
+                  <th>Qte</th>
+                  <th>Prix U</th>
+                  <th>Prix Total</th>
+                  <th>Satut</th>
+                  <th>Actions</th>
+        
+              </tr>
+              {% for panier in contenupaner %}
+               <tr >
+                      <th scope="row">{{panier.idlignedraf}}</th>
+                      <td>{{panier.idprod.nom}}</td>
+                      <td>{{panier.qte}}</td>
+                      <td>{{panier.prixu}}</td>
+                      <td>{{panier.prixtotal}}</td>
+
+
+                    <!--BOUTTON STATUT-->
+                      <td>
+                        <svg id="i-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M23 2 L23 30 M9 2 L9 30" />
+                        </svg>
+                    </td>
+                    
+                    <!--BOUTTON VOIR DETAILS-->
+                    <td>  
+                        <a href="detailprod/{{panier.idprod_id}}" title="Voir details">
+                            <svg id="i-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" >
+                                <circle cx="17" cy="15" r="1" />
+                                <circle cx="16" cy="16" r="6" />
+                                <path d="M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z" />
+                            </svg>
+                        </a>
+                    </td>
+
+                    <!--BOUTTON RETIRER PRODUITS-->
+                    <td  title="Retirer ce produit">
+                        <a href="#" ><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  >
+                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                        </svg></a>
+                    </td>
+               </tr>
+                  {% endfor %}
+            </table>
+      </div>
+
+
+
+<!--ONGLET COMMANDES-->
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0"> 
+       <div align="right" ><a class="btn btn-primary " role="button"  href="{%url 'home'%}" style="background-color: brown;">Faire une commande</a></div>
+          <table class="table">
+              <tr>
+                  <th>N°</th>
+                  <th >Date</th>
+                  <th>Total HT </th>
+                  <th>Remise </th>
+                  <th>Total TTC</th>
+                  <th>Net Paye</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+        
+              </tr>
+              {% for comm in mescommandes %}
+               <tr >
+                      <th scope="row">{{comm.idcom}}</th>
+                      <td>{{comm.datecom}}</td>
+                      <td>{{comm.totalht}}</td>
+                      <td>{{comm.remise}}</td>
+                      <td>{{comm.totalttc}}</td>
+                      <td>{{comm.totalpaye}}</td>
+                      <td>{{comm.idstatut.libelle}}</td>
+                    
+                    <!--BOUTTON VOIR DETAILS-->
+                    <td>  
+                        <a href="detailprod/{{comm.idprod_id}}" title="Voir details">
+                            <svg id="i-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" >
+                                <circle cx="17" cy="15" r="1" />
+                                <circle cx="16" cy="16" r="6" />
+                                <path d="M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z" />
+                            </svg>
+                        </a>
+                    </td>
+
+                    <!--BOUTTON RETIRER PRODUITS-->
+                    <td  title="Retirer ce produit">
+                        <a href="#" ><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  >
+                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                        </svg></a>
+                    </td>
+               </tr>
+                  {% endfor %}
+            </table>
+      </div>
+
+      <!--ONGLET MES ACHATS-->
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+        <div align="right" ><a class="btn btn-primary " role="button"  href="{%url 'home'%}" style="background-color: brown;">Faire une commande</a></div>
+
+          <table class="table">
+              <tr>
+                  <th>N°</th>
+                  <th >Produit</th>
+                  <th>Qte</th>
+                  <th>Prix U</th>
+                  <th>Prix Total</th>
+                  <th>Satut</th>
+                  <th>Actions</th>
+        
+              </tr>
+              {% for comm in mescommandes %}
+               <tr >
+                      <th scope="row">{{comm.idlignedraf}}</th>
+                      <td>{{comm.idprod.nom}}</td>
+                      <td>{{comm.qte}}</td>
+                      <td>{{comm.prixu}}</td>
+                      <td>{{comm.prixtotal}}</td>
+
+
+                    <!--BOUTTON STATUT-->
+                      <td>
+                        <svg id="i-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                            <path d="M23 2 L23 30 M9 2 L9 30" />
+                        </svg>
+                    </td>
+                    
+                    <!--BOUTTON VOIR DETAILS-->
+                    <td>  
+                        <a href="detailprod/{{comm.idprod_id}}" title="Voir details">
+                            <svg id="i-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" >
+                                <circle cx="17" cy="15" r="1" />
+                                <circle cx="16" cy="16" r="6" />
+                                <path d="M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z" />
+                            </svg>
+                        </a>
+                    </td>
+
+                    <!--BOUTTON RETIRER PRODUITS-->
+                    <td  title="Retirer ce produit">
+                        <a href="#" ><svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  >
+                        <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                        </svg></a>
+                    </td>
+               </tr>
+                  {% endfor %}
+            </table>
+      </div>
+      <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+  
+    </div>
+  
+  
+      {% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--AFFICHER LES PRODUITS DANS UN TABLEAU-->
+ 
+<!--MENU DE L'UTISATEUR CONNECTE-->
+
+    <!--CONTENU DES ONGLETS-->
+        <form method="post">
+            {%csrf_token%}
+
+         <div style="background-color: rgb(200, 222, 230) ; font-style: italic;">
+         <h7><b>BL N° {{lebl.idlignebl}}</b></h7> <br>
+         <h7>Client: {{lebl.client_id.nom}}</h7><br> 
+         <h7>Date: {{lebl.datebl}}</h7><br>
+         <h7>Montant: {{lebl.totalpaye}}</h7><br>
+        </div><br>
+        <!--Bouton creer nouveau-->
+        <div align="right"><button href="#"  class="btn btn-success" type="submit" >Editer la facture</button></div>
+        </form >
+          <table class="table">
+              <tr>
+                  <th>N° Ligne</th>
+                  <th>Produit</th>
+                  <th>Prix U</th>
+                  <th>Qte</th>
+                  <th>Prix Total</th>
+        
+              </tr>
+              {% for detailbl in contenubl %}
+               <tr >
+                      <th scope="row">{{detailbl.idlcom}}</th>
+                      <td>{{detailbl.idprod.nom}}</td>
+                      <td>{{detailbl.prixu}}</td>
+                      <td>{{detailbl.qte}}</td>
+                      <td>{{detailbl.prixtotal}}</td>
+               </tr>
+                  {% endfor %}
+            </table>
+    </div>
+  
+  
+      {% endblock %}

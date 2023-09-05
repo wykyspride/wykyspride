@@ -1,0 +1,14 @@
+
+<!--ON RECUPERE LE FORMULAIRE DANS BASE.HTML-->
+{% extends 'squelette.html' %}
+
+{% block content %}
+<!--CREATION DES PRODUITS-->
+<center>
+<form action="" method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+<button type="submit" class="btn btn-success">Valider</button>
+</form>
+{% endblock %}
+</center>

@@ -1,0 +1,181 @@
+{% extends 'squelette.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Font Awesome -->
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			rel="stylesheet"
+		/>
+		<!-- Google Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- MDB -->
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+			rel="stylesheet"
+		/>
+		<title>Inscription</title>
+	</head>
+	<body>
+		<section class="vh-100" style="background-color: #eee">
+			<div class="container h-100">
+				<div
+					class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-lg-12 col-xl-11">
+						<div class="card text-black" style="border-radius: 25px">
+							<div class="card-body p-md-5">
+								<div class="row justify-content-center">
+									<div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" >
+										<p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+											Espace Inscription
+										</p>
+										{% if error %}
+										<div class="alert alert-danger" role="alert" data-mdb-color="danger">
+										{{ message }}
+										</div>
+										{% endif %}
+
+										{% if success %}
+										<div class="alert alert-success" role="alert" data-mdb-color="success">
+										{{ message }}
+										</div>
+										{% endif %}
+
+										<form class="mx-1 mx-md-4" method="POST" action="">
+											{% csrf_token %}
+
+<!-- Lien de icones   https://fontawesome.com/icons/envelope?f=classic&s=solid-->
+
+<!------------------------------GENRE------------------------------------>
+<div class="d-flex flex-row align-items-center mb-3">
+	<svg id="i-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<path d="M22 11 C22 16 19 20 16 20 13 20 10 16 10 11 10 6 12 3 16 3 20 3 22 6 22 11 Z M4 30 L28 30 C28 21 22 20 16 20 10 20 4 21 4 30 Z" />
+	</svg>
+	    <select class="form-select" id="validationTooltip04" required name="genre">
+      <option selected disabled value="" name="genre">Genre</option>
+      <option>Homme</option>
+      <option>Femme</option>
+    
+    </select>
+</div>
+
+
+<!------------------------------NOM------------------------------------>
+
+<div class="d-flex flex-row align-items-center mb-4">
+	<svg id="i-compose" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<path d="M27 15 L27 30 2 30 2 5 17 5 M30 6 L26 2 9 19 7 25 13 23 Z M22 6 L26 10 Z M9 19 L13 23 Z" />
+	</svg>
+	<div class="form-outline flex-fill mb-0" >
+            <input type="text"  name="name" id="form3Example3c" class="form-control"/>
+             <label class="form-label" for="form3Example3c">Votre Login</label>
+        </div>
+</div>
+			
+<!------------------------------NOM COMPLET------------------------------------>
+<div class="d-flex flex-row align-items-center mb-4">
+	<svg id="i-compose" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<path d="M27 15 L27 30 2 30 2 5 17 5 M30 6 L26 2 9 19 7 25 13 23 Z M22 6 L26 10 Z M9 19 L13 23 Z" />
+	</svg>
+	<div class="form-outline flex-fill mb-0">
+  <input type="text" name="nomcomplet" id="form3Example3c" class="form-control"/>
+  <label class="form-label"for="form3Example3c">Votre nom</label>
+</div>
+</div>
+
+<!------------------------------ADRESSE MAIL------------------------------------>
+<div class="d-flex flex-row align-items-center mb-4">
+	<svg id="i-mail" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<path d="M2 26 L30 26 30 6 2 6 Z M2 6 L16 16 30 6" />
+	</svg>
+			<div class="form-outline flex-fill mb-0">
+			<input type="email" name="email" id="form3Example3c"class="form-control"/>
+			<label class="form-label" for="form3Example3c">Votre mail</label>
+		</div>
+</div>
+
+<!------------------------------CONTACT------------------------------------>
+		<div class="d-flex flex-row align-items-center mb-4">
+			<svg id="i-mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+				<path d="M21 2 L11 2 C10 2 9 3 9 4 L9 28 C9 29 10 30 11 30 L21 30 C22 30 23 29 23 28 L23 4 C23 3 22 2 21 2 Z M9 5 L23 5 M9 27 L23 27" />
+			</svg>
+			<div class="form-outline flex-fill mb-0">
+						<input type="text" name="contact" id="form3Example3c" class="form-control"/>
+						<label class="form-label" for="form3Example3c" >Votre Contact</label>
+					</div>
+		</div>
+<!------------------------------LOCALISATION------------------------------------>
+<div class="d-flex flex-row align-items-center mb-4">
+	<svg id="i-location" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+		<circle cx="16" cy="11" r="4" />
+		<path d="M24 15 C21 22 16 30 16 30 16 30 11 22 8 15 5 8 10 2 16 2 22 2 27 8 24 15 Z" />
+	</svg>
+			<div class="form-outline flex-fill mb-0">
+			<input type="text" name="localisation" id="form3Example3c" class="form-control"/>
+			<label class="form-label" for="form3Example3c" >Votre localisation</label>
+		</div>
+</div>
+<!------------------------------MOT DE PASSE------------------------------------>
+        <div class="d-flex flex-row align-items-center mb-4">
+			<svg id="i-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+				<path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 9 9 5 16 5 23 5 23 9 23 15 M16 20 L16 23" />
+				<circle cx="16" cy="24" r="1" />
+			</svg>
+				<div class="form-outline flex-fill mb-0">
+					<input type="password" name="password" id="form3Example3c" class="form-control" />
+					<label class="form-label" for="form3Example3c">Votre mot de passe</label>
+				</div>
+
+
+
+				
+		</div>
+                      
+<!------------------------------RESSAISIE MOT DE PASSE------------------------------------>
+		<div class="d-flex flex-row align-items-center mb-4">
+			<svg id="i-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+				<path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 9 9 5 16 5 23 5 23 9 23 15 M16 20 L16 23" />
+				<circle cx="16" cy="24" r="1" />
+			</svg>
+			
+			<div class="form-outline flex-fill mb-0">
+ 					 <input type="password" name="repassword" id="form3Example3c" class="form-control"/>
+ 					 <label class="form-label" for="form3Example3c">Ressaisir le mot de passe</label>
+			</div>
+		</div>
+
+<!------------------------------BOUTON DE VALIDATION------------------------------------>
+		<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+			<button type="submit" class="btn btn-primary btn-lg" > S'inscrire</button>
+		</div>
+	</form>
+</div>
+<div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+										<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- MDB -->
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
+		></script>
+	</body>
+</html>
+
+  {% endblock %}
